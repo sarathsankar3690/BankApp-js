@@ -9,10 +9,10 @@ export class LoginComponent implements OnInit {
 
   aim="Welcome to Luminar Bank";
   account="Account Number Please";
-  acno="";
+  accno="";
   pswd="";
 
-  users = {
+  users:any = {
     1000: { acno: 1000, username: "userone", password: "userone", actype: "savings", balance: 5000 },
     1001: { acno: 1001, username: "usertwo", password: "usertwo", actype: "savings", balance: 6000 },
     1002: { acno: 1002, username: "userthree", password: "userthree", actype: "savings", balance: 7000 },
@@ -25,12 +25,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){
-    alert("login successful");
-  }
 
   accChange(event:any){
-    this.acno=event.target.value
+    this.accno=event.target.value
     console.log(event.target.value)
   }
 
@@ -38,4 +35,27 @@ export class LoginComponent implements OnInit {
     this.pswd=event.target.value
     console.log(event.target.value)
   }
+
+  login(){
+    
+    var acno = this.accno;
+    var pwd = this.pswd;
+
+    let accDetails = this.users;
+    
+    if (acno in accDetails){
+      if (pwd == accDetails[acno]["password"]){
+        alert("Login successful")
+      }
+      else {
+        alert("Incorrect password")
+      }
+      }
+    else {
+      alert("Invalid account number")
+    }
+
+  }
+
 }
+
